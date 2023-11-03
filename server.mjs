@@ -9,7 +9,8 @@ app.get('/weather', async (req, res) => {
   try {
     const response = await axios.get('https://api.hgbrasil.com/weather?key=50f43aa2&woeid=455826&array_limit=2&fields=only_results,description,condition_slug&locale=pt');
     const description = response.data.description;
-    res.json({ description });
+    const condition_slug = response.data.condition_slug;
+    res.json({ description, condition_slug });
   } catch (error) {
     console.error('Error retrieving data from the API:', error);
     res.status(500).json({ error: 'Internal Server Error' });
